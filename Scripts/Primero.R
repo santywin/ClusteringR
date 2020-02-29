@@ -45,8 +45,19 @@ df_wb %>%
 df_wb %>% 
   gather(key, val, -iso3c) %>% 
   ggplot(aes(key, val, color=key)) +
-  geom_boxplot() + coord_flip() +
+  geom_boxplot() + 
   facet_wrap(~key, scales = "free", nrow = 2)
+
+
+
+df_wb %>% 
+  gather(key, val, -iso3c) %>% 
+  ggplot(aes(key, val, fill=key)) +
+  geom_boxplot() + 
+  facet_wrap(~key, scales = "free", nrow = 2) + 
+  guides(fill=FALSE)
+
+  
 
 
 
