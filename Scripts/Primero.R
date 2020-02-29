@@ -7,6 +7,7 @@ library(readr)
 library(readxl)
 
 
+#leer archivo base formato csv
 df_wb <-read_delim("data/base_wb.csv", delim = ";")
 
 
