@@ -29,9 +29,24 @@ df_wb <-read_delim("data/base_wb.csv", delim = ";") %>%
 
 df_wb %>% View
 
-?read_delim
+head(df_wb)
 
 
+summary(df_wb)
+
+
+
+df_wb %>% 
+  gather(key, val, -iso3c) %>% 
+  ggplot(aes(key, val, color=key)) +
+  geom_boxplot()
+
+
+df_wb %>% 
+  gather(key, val, -iso3c) %>% 
+  ggplot(aes(key, val, color=key)) +
+  geom_boxplot() + coord_flip() +
+  facet_wrap(~key, scales = "free", nrow = 2)
 
 
 
