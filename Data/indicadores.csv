@@ -1,0 +1,13 @@
+indicator;indicator.id;type
+Cereal yield (kg per hectare);AG.YLD.CREL.KG;clima
+Access to electricity (% of population);EG.ELC.ACCS.ZS;clima
+Population in urban agglomerations of more than 1 million (% of total population);EN.URB.MCTY.TL.ZS;clima
+Terrestrial and marine protected areas (% of total territorial area);ER.PTD.TOTL.ZS;clima
+Air transport, registered carrier departures worldwide;IS.AIR.DPRT;infra
+Container port traffic (TEU: 20 foot equivalent units);IS.SHP.GOOD.TU;infra
+Fixed telephone subscriptions (per 100 people);IT.MLT.MAIN.P2;infra
+Fixed broadband subscriptions (per 100 people);IT.NET.BBND.P2;infra
+Secure Internet servers (per 1 million people);IT.NET.SECR.P6;infra
+GDP per capita;NY.GDP.PCAP.PP.CD;econ
+Mortality rate, under-5 (per 1,000 live births);SH.DYN.MORT;clima
+Population growth (annual %);SP.POP.GROW;clima
