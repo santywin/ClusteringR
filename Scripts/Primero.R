@@ -1,4 +1,5 @@
 #install.packages("ggdendro")
+install.packages("factoextra")
 
 library(dplyr)
 library(tidyr)
@@ -10,6 +11,7 @@ library(readxl)
 library(stringr)
 library(purrr)
 library(ggdendro)
+library(factoextra)
 
 #leer archivo base formato csv
 df_wb <-read_delim("data/base_wb.csv", delim = ";")
@@ -184,6 +186,62 @@ plt <- map(meth, function(x){
 
 
 multiplot(plotlist = plt, cols = 3)
+
+
+set.seed(2001)
+km_mod <- kmeans(d_wb, centers = 5)
+
+
+km_mod$tot.withinss
+
+
+km_mods <- map_df(c(2:26),function(x){
+  set.seed(2001)
+  mod <- kmeans(d_wb, centers = x)
+  tibble(k=x, error=mod$tot.withinss)
+})
+
+
+km_mods %>% 
+  ggplot(aes(k, error, label=round(error,2))) + geom_line()+
+  geom_line() +
+  geom_text(size=3)+
+  scale_x_continuous(breaks = c(2:26))
+
+
+
+?silhouette
+
+
+# 
+# km_mods <- map_df(c(2:26),function(x){
+#   set.seed(2001)
+#   mod <- kmeans(d_wb, centers = x)
+#   sil <- silhouette(mod$cluster)
+#   tibble(k=x, error=mod$tot.withinss, sil=sil)
+# })
+
+
+km_mods <- map_df(c(2:26),function(x){
+  set.seed(2001)
+  mod <- kmeans(d_wb, centers = x)
+  sil <- mean(silhouette(mod$cluster, d_wb)[, 3])
+  tibble(k=x, error=mod$tot.withinss, sil=sil)
+})
+
+km_mods %>% 
+  ggplot(aes(k, sil, label=round(sil,2))) + geom_line()+
+  geom_line() +
+  geom_text(size=3)+
+  scale_x_continuous(breaks = c(2:26))
+
+
+clus_mods <- map_df(c(2:26),function(x){
+  km <- mean(silhouette(Kmeans$cluster, d_wb)[, 3])
+  mod <- kmeans(d_wb, centers = x)
+  sil <- mean(silhouette(mod$cluster, d_wb)[, 3])
+  tibble(k=x, error=mod$tot.withinss, sil=sil)
+})
 
 
 
