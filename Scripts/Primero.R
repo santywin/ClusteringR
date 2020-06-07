@@ -250,18 +250,22 @@ clus_mods <- map_df(c(2:26), function(x){
   )
 })
 
+
+
 clus_mods %>% 
   gather(Clusters,value, -k) %>% 
   ggplot(aes(x=k, y=value, color=Clusters))+
   geom_line()+
-  geom_point()
+  geom_point() +
+  scale_x_continuous(breaks = c(2:26))+
+  labs(color="Modelos") +
+  guides(color=guide_legend(label = c("HC Promedio", "HC Completo", "HC Kmeans", "HC Simple")))
+  theme(axis.line = element_line(),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(linetype = "dashed", colour = "gray80"))
 
 
 
-clus_mods %>% 
-  gather(Clusters,value, -k) %>% 
-  ggplot(aes(x=k, y=value, color=Clusters))+
-  geom_jitter()
 
 
 
